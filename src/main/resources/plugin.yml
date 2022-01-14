@@ -1,0 +1,10 @@
+name: Stellwerk
+version: '${project.version}'
+main: at.plexnet.stellwerk.Stellwerk
+api-version: 1.18
+authors: [ Yolyon ]
+description: Main Plugin für den Stellwerk Server
+website: www.plexnet.at:8123
+commands:
+  test:
+  date:
