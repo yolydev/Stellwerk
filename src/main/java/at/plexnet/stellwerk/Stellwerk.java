@@ -1,6 +1,7 @@
 package at.plexnet.stellwerk;
 
 import at.plexnet.stellwerk.commands.DateCommand;
+import at.plexnet.stellwerk.commands.GroupAddCommand;
 import at.plexnet.stellwerk.commands.TestCommand;
 import at.plexnet.stellwerk.events.ChatEvent;
 import at.plexnet.stellwerk.events.JoinEvent;
@@ -10,23 +11,36 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
-
 public final class Stellwerk extends JavaPlugin {
+    public static Stellwerk instance;
+    private StellwerkGroupManager stellwerkGroupManager;
+
+    // Reading from the config
+    //String name = plugin.getConfig().getString("player-name");
+
+    // Writing to the config
+    //plugin.getConfig().set("player-name", name);
 
     @Override
     public void onEnable() {
-        Bukkit.getLogger().fine("[Stellwerk] wird aktiviert.");
-
+        instance = this;
+        this.stellwerkGroupManager = new StellwerkGroupManager(this);
         commands();
         events();
-        createFolder();
+        saveDefaultConfig();
     }
 
     @Override
     public void onDisable() {
-        Bukkit.getLogger().fine("[Stellwerk] wird deaktiviert.");
+
+    }
+
+    public static Stellwerk getInstance() {
+        return instance;
+    }
+
+    public StellwerkGroupManager getStellwerkGroupManager() {
+        return stellwerkGroupManager;
     }
 
     public static String getPrefix() {
@@ -36,6 +50,7 @@ public final class Stellwerk extends JavaPlugin {
     public void commands() {
         getCommand("test").setExecutor(new TestCommand());
         getCommand("date").setExecutor(new DateCommand());
+        getCommand("groupadd").setExecutor(new GroupAddCommand());
     }
 
     public void events() {
@@ -43,21 +58,5 @@ public final class Stellwerk extends JavaPlugin {
         manager.registerEvents(new JoinEvent(), this);
         manager.registerEvents(new QuitEvent(), this);
         manager.registerEvents(new ChatEvent(), this);
-    }
-
-    public void createFolder() {
-        File file = new File("plugins/Stellwerk");
-        File config = new File("plugins/Stellwerk/config.txt");
-        if(!file.exists()) {
-            file.mkdirs();
-
-            if(!config.exists()) {
-                try {
-                    config.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 }

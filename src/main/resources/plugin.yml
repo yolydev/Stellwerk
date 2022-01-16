@@ -8,3 +8,4 @@ website: www.plexnet.at:8123
 commands:
   test:
   date:
+  groupadd:
