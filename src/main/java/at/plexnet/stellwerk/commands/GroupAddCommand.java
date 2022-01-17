@@ -19,9 +19,11 @@ public class GroupAddCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         //groupadd <player> <group>
+        //change to /group add/remove <player> <group>
+        //make user/group safe to config.yml
         if(args.length == 0) {
-            sender.sendMessage(manager.getUser().toString());
-            sender.sendMessage(manager.getAdmin().toString());
+            sender.sendMessage("User List: " + manager.getUser().toString());
+            sender.sendMessage("Admin List: " + manager.getAdmin().toString());
         }
         if(args.length == 2) {
             Player player = Bukkit.getPlayer(args[0]);
@@ -29,18 +31,18 @@ public class GroupAddCommand implements CommandExecutor {
             if(args[1].equals("user")) {
                 if(manager.isUser(player)) {
                     manager.setUser(player, false);
-                    sender.sendMessage("removed " + player.getName() + " from the user list");
+                    sender.sendMessage("Removed " + player.getName() + " from the user list");
                 } else {
                     manager.setUser(player, true);
-                    sender.sendMessage("added " + player.getName() + " to the user list");
+                    sender.sendMessage("Added " + player.getName() + " to the user list");
                 }
             } else if(args[1].equals("admin")) {
                 if(manager.isAdmin(player)) {
                     manager.setAdmin(player, false);
-                    sender.sendMessage("removed " + player.getName() + " from the admin list");
+                    sender.sendMessage("Removed " + player.getName() + " from the admin list");
                 } else {
                     manager.setAdmin(player, true);
-                    sender.sendMessage("added " + player.getName() + " to the admin list");
+                    sender.sendMessage("Added " + player.getName() + " to the admin list");
                 }
             }
         }
