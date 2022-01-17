@@ -4,5 +4,8 @@ user-prefix: (User)
 admin-prefix: (Admin)
 #liste von spielern mit der rolle admin
 groups:
-  user: []
-  admin: []
+  user:
+    - Yolyon
+    -
+  admin:
+    - Yolyon
