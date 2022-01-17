@@ -21,6 +21,7 @@ public class GroupAddCommand implements CommandExecutor {
         //groupadd <player> <group>
         //change to /group add/remove <player> <group>
         //make user/group safe to config.yml
+
         if(args.length == 0) {
             sender.sendMessage("User List: " + manager.getUser().toString());
             sender.sendMessage("Admin List: " + manager.getAdmin().toString());

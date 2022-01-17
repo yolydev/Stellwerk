@@ -1,5 +1,6 @@
 package at.plexnet.stellwerk;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.units.qual.A;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StellwerkGroupManager {
+    FileConfiguration config = Stellwerk.getInstance().getConfig();
+
     private final Plugin plugin;
     private final List<Player> user;
     private final List<Player> admin;

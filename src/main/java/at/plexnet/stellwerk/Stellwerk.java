@@ -8,13 +8,18 @@ import at.plexnet.stellwerk.events.JoinEvent;
 import at.plexnet.stellwerk.events.QuitEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public final class Stellwerk extends JavaPlugin {
     public static Stellwerk instance;
     private StellwerkGroupManager stellwerkGroupManager;
+    private FileManager fileManager;
 
+    FileConfiguration config = getConfig();
     // Reading from the config
     //String name = plugin.getConfig().getString("player-name");
 
@@ -25,14 +30,20 @@ public final class Stellwerk extends JavaPlugin {
     public void onEnable() {
         instance = this;
         this.stellwerkGroupManager = new StellwerkGroupManager(this);
+        this.fileManager = new FileManager(this);
         commands();
         events();
-        saveDefaultConfig();
+        createConfig();
     }
 
     @Override
     public void onDisable() {
 
+    }
+
+    public void createConfig() {
+        config.options().copyDefaults(true);
+        saveConfig();
     }
 
     public static Stellwerk getInstance() {
@@ -42,6 +53,7 @@ public final class Stellwerk extends JavaPlugin {
     public StellwerkGroupManager getStellwerkGroupManager() {
         return stellwerkGroupManager;
     }
+    public FileManager getFileManager() { return fileManager; }
 
     public static String getPrefix() {
         return ChatColor.GRAY + "(" + ChatColor.GOLD + "Stellwerk" + ChatColor.GRAY + ") " + ChatColor.GRAY;
