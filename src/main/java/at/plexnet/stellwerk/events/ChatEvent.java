@@ -27,7 +27,6 @@ public class ChatEvent implements Listener {
         for(Player tempUser : manager.getUser()){
             event.setFormat(userPrefix + " " + tempUser.getName() + ": " + event.getMessage());
         }
-
         for(Player tempAdmin : manager.getAdmin()){
             event.setFormat(adminPrefix + " " + tempAdmin.getName() + ": " + event.getMessage());
         }
