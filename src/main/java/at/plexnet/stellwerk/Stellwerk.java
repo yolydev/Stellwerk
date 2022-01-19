@@ -3,9 +3,7 @@ package at.plexnet.stellwerk;
 import at.plexnet.stellwerk.commands.DateCommand;
 import at.plexnet.stellwerk.commands.GroupAddCommand;
 import at.plexnet.stellwerk.commands.TestCommand;
-import at.plexnet.stellwerk.events.ChatEvent;
-import at.plexnet.stellwerk.events.JoinEvent;
-import at.plexnet.stellwerk.events.QuitEvent;
+import at.plexnet.stellwerk.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -37,9 +35,7 @@ public final class Stellwerk extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-
-    }
+    public void onDisable() { }
 
     public void createConfig() {
         config.options().copyDefaults(true);
@@ -70,5 +66,7 @@ public final class Stellwerk extends JavaPlugin {
         manager.registerEvents(new JoinEvent(), this);
         manager.registerEvents(new QuitEvent(), this);
         manager.registerEvents(new ChatEvent(), this);
+        manager.registerEvents(new GUIEvent(), this);
+        manager.registerEvents(new BlockEvent(), this);
     }
 }
